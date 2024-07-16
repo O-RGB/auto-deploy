@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: your-image-name  # ชื่อ image ที่คุณต้องการ
+    container_name: nextjs-app  # ชื่อ container ที่คุณต้องการ
+    ports:
+      - "3000:3000"  # แมพพอร์ตจาก host ไปยัง container
+    environment:
+      NODE_ENV: production  # ตั้งค่า environment variable
+      PORT: 3000  # ตั้งค่า PORT สำหรับแอพพลิเคชัน
+    networks:
+      - app-network  # ตั้งค่า network ให้กับ service
+
+networks:
+  app-network:
+    driver: bridge  # ใช้ bridge network driver เป็นค่าเริ่มต้น

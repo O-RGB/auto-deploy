@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    tools {
+        nodejs 'node 20.15.1'
+    }
+    stages {
+        stage('NodeJs Test') {
+            steps {
+                sh 'npm version'
+            }
+        }
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your Git repository
+                git branch: 'main', url: 'https://github.com/O-RGB/auto-deploy.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+    }
+
+    // post {
+    //     always {
+    //         // Clean up actions like archiving artifacts or notifications
+    //         cleanWs()
+    //     }
+    // }
+}

@@ -9,12 +9,6 @@ pipeline {
                 sh 'npm version'
             }
         }
-        stage('Checkout') {
-            steps {
-                // Checkout the code from your Git repository
-                git branch: 'main', url: 'https://github.com/O-RGB/auto-deploy.git'
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
